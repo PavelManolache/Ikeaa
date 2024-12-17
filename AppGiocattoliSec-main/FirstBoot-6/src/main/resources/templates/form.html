@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Management</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        window.onload = gestoreLoad;
+
+        function gestoreLoad() {
+            google.charts.load('current', { 'packages': ['corechart'] });
+            let data = [];
+
+            google.charts.setOnLoadCallback(getCharts);
+
+            async function getCharts() {
+                try {
+                    const response = await fetch('/lista');
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    data = await response.json();
+                    console.log(data[1]['marca']);
+
+                    let DataArray = [];
+                    DataArray.push(["nome", "venduti"]);
+
+                    for (let i = 0; i < data.length; i++) {
+                        DataArray.push([data[i].nome, data[i].pezziV]);
+                    }
+
+                    var options = {
+                        title: 'Dati di vendita',
+                        chartArea: { width: '50%' },
+                        hAxis: {
+                            title: 'Venduti',
+                            minValue: 0
+                        },
+                        vAxis: {
+                            title: 'Nome'
+                        }
+                    };
+
+                    var dataTable = google.visualization.arrayToDataTable(DataArray);
+
+                    var pieChart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    var barChart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+                    pieChart.draw(dataTable, options);
+                    barChart.draw(dataTable, options);
+
+                    console.log(DataArray);
+
+                } catch (error) {
+                    console.error('There was a problem:', error);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container py-5">
+        <h1 class="text-center mb-4">IKEA Products SRL</h1>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3>Inserisci prodotto</h3>
+                <form action="/submit" method="POST">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome del prodotto:</label>
+                        <input type="text" class="form-control" name="nome" id="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="marca" class="form-label">Marca del prodotto:</label>
+                        <input type="text" class="form-control" name="marca" id="marca" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prezzo" class="form-label">Prezzo del prodotto:</label>
+                        <input type="number" class="form-control" name="prezzo" id="prezzo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="url" class="form-label">URL del prodotto:</label>
+                        <input type="text" class="form-control" name="url" id="url">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Invia</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3>Aggiorna prezzo del prodotto</h3>
+                <form action="/update" method="POST">
+                    <div class="mb-3">
+                        <label for="nomeUpdate" class="form-label">Nome del prodotto:</label>
+                        <input type="text" class="form-control" name="nome" id="nomeUpdate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prezzoUpdate" class="form-label">Prezzo del prodotto:</label>
+                        <input type="number" class="form-control" name="prezzo" id="prezzoUpdate" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Aggiorna</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h3>Cancella prodotto</h3>
+                <form action="/delete" method="POST">
+                    <div class="mb-3">
+                        <label for="nomeDelete" class="form-label">Seleziona prodotto:</label>
+                        <select class="form-select" name="nome" id="nomeDelete">
+                            <option th:each="gioco : ${lista}" th:value="${gioco.nome}" th:text="${gioco.nome}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Cancella</button>
+                </form>
+            </div>
+        </div>
+
+        <h3>Grafici vendite</h3>
+        <div id="piechart" class="my-4" style="width: 100%; height: 500px;"></div>
+        <div id="chart_div" style="width: 100%; height: 500px;"></div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
