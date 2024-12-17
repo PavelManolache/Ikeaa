@@ -10,4 +10,8 @@ sistema di scaricamento delle dipendenze:![image](https://github.com/user-attach
 
 
 
-tecnologie utilizzate:thymeleaf , mysql-connector , stripe-java , java-mail , spring data jdbc ,spring web.
+tecnologie utilizzate:
+
+back-end :thymeleaf , mysql-connector , stripe-java , java-mail , spring data jdbc ,spring web , spring-boot-starter-security
+
+front-end:bootstrap
