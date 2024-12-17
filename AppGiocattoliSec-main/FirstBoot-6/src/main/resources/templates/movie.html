@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Movie Details</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Movie Search</h1>
+
+        <!-- Search Form -->
+        <form th:action="@{/movie}" method="get" class="form-inline justify-content-center mb-4">
+            <div class="form-group mr-2">
+                <label for="title" class="sr-only">Search for a Movie</label>
+                <input type="text" id="title" name="title" th:value="${searchedTitle}" 
+                       class="form-control" placeholder="Enter movie title" />
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        <hr/>
+
+        <!-- Movie Details -->
+        <div th:if="${movie != null}" class="card mb-4 mx-auto" style="max-width: 600px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img th:src="${movie.poster}" alt="Movie Poster" class="card-img" />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${movie.title}">Title</h5>
+                        <p class="card-text"><strong>Year:</strong> <span th:text="${movie.year}"></span></p>
+                        <p class="card-text"><strong>Genre:</strong> <span th:text="${movie.genre}"></span></p>
+                        <p class="card-text"><strong>Director:</strong> <span th:text="${movie.director}"></span></p>
+                        <p class="card-text"><strong>Plot:</strong> <span th:text="${movie.plot}"></span></p>
+                        <p class="card-text"><strong>Language:</strong> <span th:text="${movie.language}"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${movie == null}" class="alert alert-warning text-center" role="alert">
+            No movie found. Please try again.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
