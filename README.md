@@ -1,7 +1,7 @@
 ![image](https://github.com/user-attachments/assets/a8630d75-8e99-48e1-bd86-384e7599e3b1)
 
 # Description
-A bare bone a web app created in SpringBoot and Thymeleaf with a MySQL backend. This project aims to develop a fully functional e-commerce platform for furniture, allowing users to browse, select, and purchase furniture items listed in the database.
+A bare bone a web app created in SpringBoot , Thymeleaf and MySQL . This project aims to develop a fully functional e-commerce platform for furniture, allowing users to browse, select, and purchase furniture items listed in the database.
 
 
 # Dipendecy loader:   
