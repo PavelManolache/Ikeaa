@@ -14,3 +14,5 @@ A bare bone a web app created in SpringBoot and Thymeleaf with a MySQL backend. 
 - **Spring Data JDBC**: For database access and manipulation
 - **Spring Web**: For building RESTful web services
 - **Spring Boot Web Tools**: For development and testing
+## Warning 
+You need setup a MySQL database , in my case it's strumenti_db , so i recommend to just create a local database with the same name. 
