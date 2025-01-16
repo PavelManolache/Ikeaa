@@ -7,9 +7,9 @@ A bare bone a web app created in SpringBoot and Thymeleaf with a MySQL backend. 
 Dipendecy loader:   ![image](https://github.com/user-attachments/assets/71b3f9b9-77e7-47a9-bc08-db034dbfffad)
 
 ## Technologies Used 
-    **Spring Boot**: For building the backend of the application
-    **Thymeleaf**: For rendering dynamic web pages on the server side
-   **MySQ**L: As the database to store product and user information
-    **Spring Data JDBC**: For database access and manipulation
-    **Spring Web**: For building RESTful web services
-    **Spring Boot Web Tools**: For development and testing
+- **Spring Boot**: For building the backend of the application
+- **Thymeleaf**: For rendering dynamic web pages on the server side
+- **MySQL**: As the database to store product and user information 
+- **Spring Data JDBC**: For database access and manipulation
+- **Spring Web**: For building RESTful web services
+- **Spring Boot Web Tools**: For development and testing
